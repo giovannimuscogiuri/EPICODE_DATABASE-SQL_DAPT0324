@@ -39,8 +39,10 @@ SELECT
     EnglishProductName,
     StandardCost,
     ListPrice,
+	
 -- Arricchisci il risultato della query scritta nel passaggio precedente del Markup 
 -- applicato dall’azienda (ListPrice - StandardCost)
+	
     ListPrice - StandardCost
     
 FROM
