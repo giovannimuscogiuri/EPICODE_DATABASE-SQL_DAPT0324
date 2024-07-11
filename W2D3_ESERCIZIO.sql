@@ -89,7 +89,4 @@ FROM
     AdventureWorksDW.factresellersales
 WHERE
 	OrderDate > '2020-01-01' and
-    (ProductKey like 597 or
-    ProductKey like 598 or
-    ProductKey like 477 or
-    ProductKey like 214);
+ 	ProductKey in (597 , 598 , 477 , 214);
