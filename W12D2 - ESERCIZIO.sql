@@ -100,25 +100,17 @@ HAVING Numero_Album = (SELECT
 -- Trovate l’artista con l’album più costoso.
 
 SELECT 
-    AR.NAME ARTIST, AL.TITLE ALBUM
+    artist.Name as Artista,
+    album.title as Titolo_Album,
+    sum(track.UnitPrice) as Costo_Album
 FROM
-    TRACK T
-        LEFT JOIN
-    ALBUM AL ON T.ALBUMID = AL.ALBUMID
-        LEFT JOIN
-    ARTIST AR ON AL.ARTISTID = AR.ARTISTID
-GROUP BY AR.NAME , AL.TITLE
-HAVING SUM(T.UNITPRICE) = (SELECT 
-        MAX(ALBUM_PRICE)
-    FROM
-        (SELECT 
-            AR.NAME ARTIST,
-                AL.TITLE ALBUM,
-                SUM(T.UNITPRICE) AS ALBUM_PRICE
-        FROM
-            TRACK T
-        LEFT JOIN ALBUM AL ON T.ALBUMID = AL.ALBUMID
-        LEFT JOIN ARTIST AR ON AL.ARTISTID = AR.ARTISTID
-        GROUP BY AR.NAME , AL.TITLE) A);
+	artist
+    join
+    album on artist.ArtistId = album.ArtistId
+    join
+    track on album.AlbumId = track.AlbumId
+Group by artist.Name, Album.title
+order by sum(track.UnitPrice) desc limit 1
+;
 
 
